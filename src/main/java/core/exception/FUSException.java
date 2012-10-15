@@ -1,6 +1,6 @@
 package core.exception;
 
-public class FuException extends Exception {
+public class FUSException extends Exception {
 	/*
 	 * Code convention: 
 	 * err0xx - Runtime 
@@ -18,7 +18,7 @@ public class FuException extends Exception {
 	private String message;
 	private Exception exception;
 
-	public FuException(String type, String code, String message,
+	public FUSException(String type, String code, String message,
 			Exception exception) {
 		this.type = type;
 		this.code = code;
@@ -26,7 +26,7 @@ public class FuException extends Exception {
 		this.exception = exception;
 	}
 
-	public FuException(String type, String code, String message) {
+	public FUSException(String type, String code, String message) {
 		this.type = type;
 		this.code = code;
 		this.message = message;

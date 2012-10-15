@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import core.exception.ControllerException;
-import core.exception.FuException;
+import core.exception.FUSException;
 
 public class ExceptionHandler implements HandlerExceptionResolver {
 
@@ -39,19 +39,19 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		try {
 			ModelAndView mav = new ModelAndView();
 			mav.setView(view);
-			if (ex instanceof FuException) {
-				FuException e = (FuException) ex;
+			if (ex instanceof FUSException) {
+				FUSException e = (FUSException) ex;
 				String message = e.getCode() + " - " + e.getMessage();
 
-				if (e.getType().equals(FuException.DATA_EXCEPTION)) {
+				if (e.getType().equals(FUSException.DATA_EXCEPTION)) {
 					DATA_LOGGER.error(message, e.getException());
 
-				} else if (e.getType().equals(FuException.VALIDATION_EXCEPTION)) {
+				} else if (e.getType().equals(FUSException.VALIDATION_EXCEPTION)) {
 					VALIDATION_LOGGER.error(message, e.getException());
 				}
 
 				LOGGER.error(message);
-				mav.addObject("error", ((FuException) ex).getCode());
+				mav.addObject("error", ((FUSException) ex).getCode());
 			} else if (ex instanceof AccessDeniedException) {
 				LOGGER.error("err101 - Access Denied Error");
 				SECURITY_LOGGER.error("err101 - Access Denied Error", ex);
